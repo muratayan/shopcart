@@ -6,15 +6,20 @@
 
 package com.mypack.servlets;
 
+import com.mypack.beans.Car;
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.DeclareRoles;
 import static javax.enterprise.deploy.shared.ModuleType.EJB;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class LoginServ extends HttpServlet {
-
+    
+    private Car car;
     /** 
      * Processes requests for both HTTP GET and POST methods.
      * @param request servlet request
@@ -22,7 +27,7 @@ public class LoginServ extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, 
                  HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -40,8 +45,11 @@ public class LoginServ extends HttpServlet {
                 return;
             }
             
+            //System.out.println("Murat KRAL");
+            //car = new Car();
             request.getSession().setAttribute("username", userName);
-            this.getServletContext().getRequestDispatcher( "/welcome.jsp" ).forward( request, response );
+            //request.getSession().setAttribute("car", car);
+            this.getServletContext().getRequestDispatcher( "/index.jsp" ).forward( request, response );
             
             //request.logout();
         } finally {
@@ -52,12 +60,20 @@ public class LoginServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServ.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

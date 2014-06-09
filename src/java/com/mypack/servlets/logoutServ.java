@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mypack.servlets;
 
+import com.mypack.beans.ShoppingBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,10 +32,17 @@ public class logoutServ extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            if(request.getUserPrincipal() != null)
+            if (request.getUserPrincipal() != null) {
                 request.logout();
-            
-            this.getServletContext().getRequestDispatcher( "/index.jsp" ).forward( request, response );
+            }
+
+            HttpSession se = null;
+            se = request.getSession();
+            ShoppingBean sb = null;
+            sb = (ShoppingBean) se.getAttribute("shoppingCart");
+            if(sb != null)
+                sb.clear();
+            this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 

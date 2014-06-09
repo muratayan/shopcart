@@ -13,6 +13,8 @@
     </head>
     <body>
         <h1>Hello <%=session.getAttribute("username")%></h1>
-        Do you want to <a href="logoutServ"> logout </a> baby?
+        <jsp:useBean id="car" scope="request" class="com.mypack.beans.Car" />
+        You have a ${car.brand}.
+        Do you want to <a href="logoutServ"> logout </a>?
     </body>
 </html>
