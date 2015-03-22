@@ -6,8 +6,8 @@ Software Architecture with Java EE 6 in Uppsala University
 
 Description and Usage
 
-As line of business we chose to design a website for local Flogsta pizza place. So that customers are only the students who accommodates in Flogsta. Shop is currently offering four different types of pizzas with the combination of four different toppings (Tomato, Cheese, Pepperoni and Mushroom). 
-Since we use JDBC Realm for user authentication, we needed to save passwords as SHA-256 hashed. Because of we couldn’t find a suitable library to perform this hash, we currently cannot accept new customers.
+As line of business I chose to design a website for local Flogsta pizza place. So that customers are only the students who accommodates in Flogsta. Shop is currently offering four different types of pizzas with the combination of four different toppings (Tomato, Cheese, Pepperoni and Mushroom). 
+Since I use JDBC Realm for user authentication, I needed to save passwords as SHA-256 hashed. Because of I couldn’t find a suitable library to perform this hash, I currently cannot accept new customers.
 For using our website, users must login into system first. After this login screen, user will be forwarded to menu page. In this page, they can examine the pizzas; add them to their cart as many as they want. However, if the shop doesn’t have enough toppings for all the toppings, users will see a warning that their pizzas will be preparing soon (after shop owner buys some more toppings). This process on the background however, records the order no matter what, prepares the pizzas which they can and puts ‘sent’ status to them, ‘not sent’ status to pizzas waiting for new toppings.
 User can also change his/her name and address in the profile section but not their username.
 
